@@ -69,21 +69,21 @@ A sleek and professional **web-based application** to manage shared expenses amo
 
 ## 📘 Example Workflow
 
-1. Add 3 friends: `Alice`, `Bob`, and `Charlie`  
+1. Add 3 friends: `Ravi`, `Ritik`, and `Rahul`  
 2. Add an expense:
    - Date: `May 13, 2025`
    - Description: `Dinner`
    - Category: `Food`
-   - Amount: `$60`
-   - Payer: `Alice`
-   - Participants: `Alice`, `Bob`, `Charlie`
+   - Amount: `₹60`
+   - Payer: `Ravi`
+   - Participants: `Ravi`, `Ritik`, `Rahul`
 3. On the dashboard:
-   - 🍽️ Dinner cost split 3 ways → $20 each
-   - Alice paid $60 → gets back $40
-   - Bob and Charlie each owe $20
+   - 🍽️ Dinner cost split 3 ways → ₹20 each
+   - Ravi paid ₹60 → gets back ₹40
+   - Ritik and Rahul each owe ₹20
    - Settlement:  
-     - `Bob ➜ Alice: $20`  
-     - `Charlie ➜ Alice: $20`
+     - `Ritk ➜ Ravi: ₹20`  
+     - `Rahul ➜ Ravi: ₹20`
 
 ---
 
