@@ -449,7 +449,7 @@ function renderExpensesTable() {
             <td data-label="Date">${formattedDate}</td>
             <td data-label="Description">${expense.description}</td>
             <td data-label="Category">${expense.category || 'Other'}</td>
-            <td data-label="Amount">$${expense.amount.toFixed(2)}</td>
+            <td data-label="Amount">₹${expense.amount.toFixed(2)}</td>
             <td data-label="Payer">${payerName}</td>
             <td data-label="Participants">${participantNames}</td>
             <td data-label="Actions">
@@ -497,7 +497,7 @@ function renderRecentExpenses() {
         row.innerHTML = `
             <td data-label="Date">${formattedDate}</td>
             <td data-label="Description">${expense.description}</td>
-            <td data-label="Amount">$${expense.amount.toFixed(2)}</td>
+            <td data-label="Amount">₹${expense.amount.toFixed(2)}</td>
             <td data-label="Payer">${payerName}</td>
         `;
         
@@ -550,7 +550,7 @@ function updateBalances() {
         
         balanceItem.innerHTML = `
             <i class="fas ${icon} mr-2"></i>
-            <span>${friend.name}: ${status} $${Math.abs(balance).toFixed(2)}</span>
+            <span>${friend.name}: ${status} ₹${Math.abs(balance).toFixed(2)}</span>
         `;
         
         balancesSummary.appendChild(balanceItem);
@@ -647,7 +647,7 @@ function updateSettlements() {
         
         settlementItem.innerHTML = `
             <i class="fas fa-exchange-alt mr-2"></i>
-            <span><strong>${settlement.fromName}</strong> should pay <strong>${settlement.toName}</strong> $${settlement.amount.toFixed(2)}</span>
+            <span><strong>${settlement.fromName}</strong> should pay <strong>${settlement.toName}</strong> ₹${settlement.amount.toFixed(2)}</span>
         `;
         
         settlementSummary.appendChild(settlementItem);
@@ -716,7 +716,7 @@ function initializeCharts() {
                                 const value = context.raw || 0;
                                 const total = context.chart.getDatasetMeta(0).total;
                                 const percentage = Math.round((value / total) * 100);
-                                return `${label}: $${value.toFixed(2)} (${percentage}%)`;
+                                return `${label}: ₹${value.toFixed(2)} (${percentage}%)`;
                             }
                         }
                     }
@@ -761,7 +761,7 @@ function initializeCharts() {
                                 const value = context.raw || 0;
                                 const total = context.chart.getDatasetMeta(0).total;
                                 const percentage = Math.round((value / total) * 100);
-                                return `${label}: $${value.toFixed(2)} (${percentage}%)`;
+                                return `${label}: ₹${value.toFixed(2)} (${percentage}%)`;
                             }
                         }
                     }
