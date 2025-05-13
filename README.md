@@ -109,9 +109,14 @@ Just download or clone the repo, and **open `index.html` in any modern web brows
 
 ---
 
-## 📸 Screenshots *(Optional)*
+## 📸 Screenshots 
+--Dashboard Tab--
+> ![Home Scree](img/Dash1.png)
+> ![Home Scree](img/Das2.png)
 
-> You can add screenshots or GIFs here to demonstrate the UI and features.
+--Manage Expenses Tab--
+> ![Home Scree](img/Mang1.png)
+
 
 ---
 
