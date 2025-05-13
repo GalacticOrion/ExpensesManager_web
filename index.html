@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for pie charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-wallet"></i> Expenses Manager</h1>
+            <button id="themeToggleBtn" class="theme-toggle-btn">
+                <i class="fas fa-moon"></i> Dark Mode
+            </button>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="dashboard">
+                <i class="fas fa-chart-pie"></i> Dashboard
+            </button>
+            <button class="tab-btn" data-tab="manage-expenses">
+                <i class="fas fa-receipt"></i> Manage Expenses
+            </button>
+        </div>
+        
+        <!-- Dashboard Tab -->
+        <div class="tab-content active" id="dashboard">
+            <div class="dashboard-grid">
+                <!-- Friends Summary -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Friends</h2>
+                        <button id="addFriendModalBtn" class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Friend
+                        </button>
+                    </div>
+                    <div class="friends-list" id="friendsList">
+                        <!-- Friends will be displayed here -->
+                    </div>
+                </div>
+                
+                <!-- Charts Section -->
+                <div class="section chart-section">
+                    <h2><i class="fas fa-chart-pie"></i> Expense Distribution</h2>
+                    <div class="charts-container">
+                        <div class="chart-item">
+                            <h3>Total Expenses by Category</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="expensesByCategory"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-item">
+                            <h3>Amount Paid by Friend</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="expensesByFriend"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Expenses -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-history"></i> Recent Expenses</h2>
+                        <button id="viewAllExpensesBtn" class="btn-secondary">
+                            View All
+                        </button>
+                    </div>
+                    <div class="recent-expenses">
+                        <div class="table-responsive">
+                            <table id="recentExpensesTable" class="responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Payer</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentExpensesBody">
+                                    <!-- Recent expenses will be displayed here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settlement Summary -->
+                <div class="section">
+                    <h2><i class="fas fa-exchange-alt"></i> Who Pays Whom</h2>
+                    <div id="settlementSummary" class="settlement-summary">
+                        <!-- Settlement information will be displayed here -->
+                    </div>
+                </div>
+                
+                <!-- Balances -->
+                <div class="section">
+                    <h2><i class="fas fa-balance-scale"></i> Balances</h2>
+                    <div id="balancesSummary" class="balances-summary">
+                        <!-- Balances will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Manage Expenses Tab -->
+        <div class="tab-content" id="manage-expenses">
+            <div class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add Expense</h2>
+                </div>
+                <div class="expense-form">
+                    <div class="form-row">
+                        <label for="expenseDate">Date:</label>
+                        <input type="date" id="expenseDate" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="expenseDescription">Description:</label>
+                        <input type="text" id="expenseDescription" placeholder="What was it for?" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="expenseCategory">Category:</label>
+                        <select id="expenseCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="expenseAmount">Amount:</label>
+                        <input type="number" id="expenseAmount" min="0" step="0.01" placeholder="How much?" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="expensePayer">Payer:</label>
+                        <select id="expensePayer" required>
+                            <option value="">Select who paid</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>Participants:</label>
+                        <div id="participantsList" class="participants-list">
+                            <!-- Participants checkboxes will be generated here -->
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button id="addExpenseBtn" class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Expense
+                        </button>
+                        <button id="resetFormBtn" class="btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-list"></i> All Expenses</h2>
+                <div class="table-responsive">
+                    <table id="expensesTable" class="responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Payer</th>
+                                <th>Participants</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expensesBody">
+                            <!-- Expenses will be displayed here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Friend Modal -->
+    <div id="friendModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="friendModalTitle">Add Friend</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <label for="friendName">Name:</label>
+                    <input type="text" id="friendName" placeholder="Friend's name">
+                </div>
+                <div class="form-actions">
+                    <button id="saveFriendBtn" class="btn-primary">Save</button>
+                    <button id="cancelFriendBtn" class="btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
